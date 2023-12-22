@@ -1,2 +1,9 @@
 ---
 # tasks file for common
+- name: install common packages
+  apt: name={{ item }} state=present
+  with_items:
+    - tree
+    - mc
+    - htop
+    - git

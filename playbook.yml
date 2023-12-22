@@ -1,6 +1,6 @@
 ---
-# Ansible playbook
-# Home work #8 - Services WITHOUT Docker
+# Ansible playbook with ROLES
+# Home work #9
 # 
 # VM Slave 1: group = build
 #   - make artefact by https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
