@@ -1,0 +1,27 @@
+---
+# Ansible playbook
+# Home work #8 - Services WITHOUT Docker
+# 
+# VM Slave 1: group = build
+#   - make artefact by https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+#   - send artefact to https://github.com/spring108/artifactory.git
+# VM Slave 2: group = prod
+#   - install apache tomcat
+#   - get artefact from https://github.com/spring108/artifactory.git
+#   - run service
+
+- name: builder-server configuration
+  hosts: builder
+  become: yes
+  roles:
+  - common
+  - builder
+
+
+- name: web-server configuration
+  hosts: web
+  become: yes
+  roles:
+  - common
+  - webserver
+
