@@ -33,7 +33,7 @@
   - #### Запуск сервисов:
     - cd /tmp
     - git clone https://github.com/spring108/ansibleRoles.git
-    - cd /tmp/ansible
+    - cd /tmp/ansibleRoles
     - cp ./hosts /etc/ansible
     - ansible all -m ping
     - ansible-playbook playbook.yml --ask-vault-pass # WITHOUT Docker
