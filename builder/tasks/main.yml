@@ -1,2 +1,46 @@
 ---
 # tasks file for builder
+
+- name: Ensure JAVA package is present
+  apt:
+    name: default-jdk
+    state: present
+
+- name: Ensure MAVEN package is present
+  apt:
+    name: maven
+    state: present
+
+
+- name: Delete repository folder for PROJECT boxfuse-sample-java-war-hello
+  file:
+    path: /tmp/boxfuse-sample-java-war-hello
+    state: absent
+
+- name: Clone GIT Repository for PROJECT boxfuse-sample-java-war-hello
+  git:
+    repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
+    dest: /tmp/boxfuse-sample-java-war-hello
+    clone: yes
+    update: yes
+
+- name: Build the artifact
+  shell: cd /tmp/boxfuse-sample-java-war-hello && mvn package
+
+
+- name: GIT Push to ARTIFACTORY-1-1
+  git_config:
+    name: user.name
+    repo: /tmp/artifactory
+    scope: global
+    value: 'Igor Skripnikov'
+- name: GIT Push to ARTIFACTORY-1-2
+  git_config:
+    name: user.email
+    repo: /tmp/artifactory
+    scope: global
+    value: 'garik108@narod.ru'
+- name: GIT Push to ARTIFACTORY-2
+  shell: cd /tmp/artifactory && git add . && git commit -m "artifact changet"
+- name: GIT Push to ARTIFACTORY-3
+  shell: cd /tmp/artifactory && git push https://spring108:{{ git_token }}@github.com/spring108/artifactory.git

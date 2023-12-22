@@ -1,2 +1,25 @@
 ---
 # tasks file for webserver
+- name: Ensure TOMCAT package is precent
+  apt:
+    name: tomcat9
+    state: present
+
+- name: Delete repository folder for ARTIFACTORY
+  file:
+    path: /tmp/artifactory
+    state: absent
+
+- name: Clone a github repository for ARTIFACTORY
+  git:
+    repo: https://github.com/spring108/artifactory.git
+    dest: /tmp/artifactory
+    clone: yes
+    update: yes
+
+- name: Copy the artifact to webapps folder
+  copy:
+    src: /tmp/artifactory/hello.war
+    dest: /var/lib/tomcat9/webapps/hello.war
+    force: true
+    remote_src: yes
