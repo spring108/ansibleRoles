@@ -27,9 +27,9 @@
 
 - name: Make some changes in PROJECT files
   lineinfile:
-    dest: '/tmp/boxfuse-sample-java-war-hello/src/main/webapp/index.jsp'
+    path: '/tmp/boxfuse-sample-java-war-hello/src/main/webapp/index.jsp'
     regexp: ^<h1>Congratulations!</h1>
-    lime: '<h1 style="color:red;">Hello DevOps home work #9 !</h1>'
+    line: '<h1 style="color:red;">Hello DevOps home work #9 !</h1>'
 
 
 - name: Build the artifact
