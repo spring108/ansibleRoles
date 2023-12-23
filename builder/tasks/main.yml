@@ -28,6 +28,26 @@
   shell: cd /tmp/boxfuse-sample-java-war-hello && mvn package
 
 
+
+
+- name: Delete repository folder for ARTIFACTORY
+  file:
+    path: /tmp/artifactory
+    state: absent
+- name: "Clone a github repository for ARTIFACTORY"
+  git:
+    repo: https://github.com/spring108/artifactory.git
+    dest: /tmp/artifactory
+    clone: yes
+    update: yes
+- name: Copy the artifact to git dir
+  copy:
+    src: /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
+    dest: /tmp/artifactory/hello.war
+    force: true
+    remote_src: yes
+
+
 - name: GIT Push to ARTIFACTORY-1-1
   git_config:
     name: user.name
