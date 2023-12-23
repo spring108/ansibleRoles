@@ -16,6 +16,7 @@
   roles:
   - common
   - builder
+  - security
 
 
 - name: web-server configuration
@@ -24,4 +25,4 @@
   roles:
   - common
   - webserver
-
+  - security
