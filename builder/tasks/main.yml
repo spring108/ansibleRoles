@@ -24,6 +24,14 @@
     clone: yes
     update: yes
 
+
+- name: Make some changes in PROJECT files
+  lineinfile:
+    path: '/tmp/boxfuse-sample-java-war-hello/src/main/webapp/index.jsp'
+    regexp: ^<h1>Congratulations!</h1>
+    lime: '<h1 style="color:red;">Hello DevOps home work #9 !</h1>'
+
+
 - name: Build the artifact
   shell: cd /tmp/boxfuse-sample-java-war-hello && mvn package
 
