@@ -1,2 +1,8 @@
 ---
 # tasks file for security
+- name: Copy the Banner
+  copy:
+    src: banner
+    dest: /etc/ssh/
+  notify:
+  - Restart SSH Service
