@@ -36,5 +36,6 @@
     - cd /tmp/ansibleRoles
     - cp ./hosts /etc/ansible
     - ansible all -m ping
-    - ansible-playbook playbook.yml --ask-vault-pass # WITHOUT Docker
-    - go to http://[Slave2_public_IP]:8080/hello/
+    - ansible-playbook playbook.yml --ask-vault-pass
+    - go to http://[Slave2_public_IP]:8080/hello/  #without docker
+    - go to http://[Slave2_public_IP]:8081/hello/  #with docker
