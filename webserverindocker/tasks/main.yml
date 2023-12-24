@@ -1,3 +1,49 @@
 ---
 # tasks file for webserverindocker
+- name: install docker.io package
+  apt: 
+    name: docker.io
+    state: present
 
+
+- name: check that the docker-compose file exists
+  stat:
+    path: /bin/docker-compose
+  register: dc_stat_result
+- name: download docker-compose file
+  get_url:
+    url: https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-linux-x86_64
+    dest: /bin/docker-compose
+  when: not dc_stat_result.stat.exists
+- name: changing perm of "/bin/docker-compose", adding "+x"
+  file: 
+    dest: /bin/docker-compose
+    mode: +x
+  when: not dc_stat_result.stat.exists
+
+
+
+- name: Delete repository folder for ARTIFACTORY
+  file:
+    path: /tmp/docker_artifactory
+    state: absent
+- name: Clone a github repository for ARTIFACTORY
+  git:
+    repo: https://github.com/spring108/artifactory.git
+    dest: /tmp/docker_artifactory
+    clone: yes
+    update: yes
+
+
+- name: Create work directory for docker-compose.yml
+  file:
+    path: /tmp/docker_compose
+    state: directory
+- name: Copy docker-compose.yml file
+  copy:
+    src: docker-compose.yml
+    dest: /tmp/docker_compose/
+
+
+- name: RUN docker-compose
+  shell: cd /tmp/docker_compose/ && docker-compose up -d

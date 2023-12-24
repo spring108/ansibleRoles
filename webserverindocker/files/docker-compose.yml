@@ -1,0 +1,13 @@
+---
+version: '3.8'
+services:
+  prod:
+    image: 'tomcat:jre8-alpine'
+    hostname: 'tomcat'
+    restart: always
+    ports:
+      - '8081:8080'
+    volumes:
+      - type: bind
+        source: folder_common
+        target: /tmp/docker_artifactory/
