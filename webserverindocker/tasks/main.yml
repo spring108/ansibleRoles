@@ -45,8 +45,8 @@
     dest: /tmp/docker_compose/
 
 
-#shell: cd /tmp/docker_compose/ && docker-compose up -d
 - name: RUN docker-compose
-  docker_compose:
-    project_src: /tmp/docker_compose/docker-compose.yml
-    up: yes
+  shell: cd /tmp/docker_compose/ && docker-compose up -d
+  #docker_compose: // FAILED !!
+  #  project_src: /tmp/docker_compose/docker-compose.yml
+  #  up: yes

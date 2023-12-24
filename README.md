@@ -27,9 +27,15 @@
       - ssh-copy-id /root/.ssh/id_rsa.pub root@Slave2
     - sudo apt update
     - sudo apt install git -y
-    - apt policy ansible
+    
+    - sudo apt policy ansible  #ansible 2.5.1
+    - sudo apt install -y software-properties-common
+    - sudo add-apt-repository --yes --update ppa:ansible/ansible
+    - sudo apt update
+    - sudo apt policy ansible  #ansible 2.9.27
+
     - sudo apt install ansible -y
-    - ansible --version #ansible 2.5.1
+    - ansible --version #ansible 2.9.27
   - #### Запуск сервисов:
     - cd /tmp
     - git clone https://github.com/spring108/ansibleRoles.git
