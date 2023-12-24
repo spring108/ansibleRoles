@@ -9,5 +9,5 @@ services:
       - '8081:8080'
     volumes:
       - type: bind
-        source: folder_common
-        target: /tmp/docker_artifactory/
+        source: /tmp/docker_artifactory/
+        target: /usr/local/tomcat/webapps/
